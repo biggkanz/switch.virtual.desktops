@@ -18,3 +18,5 @@ I converted it to [version 2](https://www.autohotkey.com/v2/) and added a featur
 `LWin` + `7` switch to desktop 7
 `LWin` + `8` switch to desktop 8
 `LWin` + `9` switch to desktop 9
+
+I converted it to [version 2](https://www.autohotkey.com/v2/) and added a feature to have one key toggle through all virtual desktops (default: F1 key).
