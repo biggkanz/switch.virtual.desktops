@@ -9,6 +9,8 @@ global CurrentDesktop := 1 ; Desktop count is 1-indexed (Microsoft numbers them 
 ;
 mapDesktopsFromRegistry() 
 {
+    global DesktopCount
+    global CurrentDesktop
 	; Get the current desktop UUID. Length should be 32 always, but there's no guarantee this couldn't change in a later Windows release so we check.
 	IdLength := 32
 	CurrentDesktopId := 0
@@ -86,6 +88,9 @@ getSessionId()
 ;
 switchDesktopByNumber(targetDesktop)
 {
+   global CurrentDesktop
+   global DesktopCount
+   
 	; Re-generate the list of desktops and where we fit in that. We do this because
 	; the user may have switched desktops via some other means than the script.
 	mapDesktopsFromRegistry()
@@ -116,6 +121,10 @@ switchDesktopByNumber(targetDesktop)
 ;
 switchNextDesktop()
 {
+    global CurrentDesktop
+    global DesktopCount
+    
+    TargetDesktop := 1
 	; Re-generate the list of desktops and where we fit in that. We do this because
 	; the user may have switched desktops via some other means than the script.
 	mapDesktopsFromRegistry()
@@ -130,18 +139,18 @@ switchNextDesktop()
 		TargetDesktop := 1
   	}
 	; Go right until we reach the desktop we want
-	while(CurrentDesktop < targetDesktop) 
+	while(CurrentDesktop < TargetDesktop) 
 	{
 		Send "^#{Right}"
 		CurrentDesktop++
-		OutputDebug("[right] target: %targetDesktop% current: %CurrentDesktop%")
+		OutputDebug("[right] target: %TargetDesktop% current: %CurrentDesktop%")
 	}
  	; Go left until we reach the desktop we want
-	while(CurrentDesktop > targetDesktop) 
+	while(CurrentDesktop > TargetDesktop) 
 	{
 		Send "^#{Left}"
 		CurrentDesktop--
-		OutputDebug("[left] target: %targetDesktop% current: %CurrentDesktop%")
+		OutputDebug("[left] target: %TargetDesktop% current: %CurrentDesktop%")
   	}
 }
 ;
@@ -149,6 +158,9 @@ switchNextDesktop()
 ;
 createVirtualDesktop()
 {
+    global CurrentDesktop
+    global DesktopCount
+    
 	Send "#^d"
 	DesktopCount++
 	CurrentDesktop := DesktopCount
@@ -159,6 +171,9 @@ createVirtualDesktop()
 ;
 deleteVirtualDesktop()
 {
+    global CurrentDesktop
+    global DesktopCount
+    
 	Send "#^{F4}"
 	DesktopCount--
 	CurrentDesktop--
