@@ -1,4 +1,4 @@
-# switch.virutal.desktops
+# switch.virtual.desktops
 ** Updated for AutoHotkey 2.0 beta.3 **
 
 Switch Windows 10 virtual desktops with hotkeys. AutoHotKey v2
